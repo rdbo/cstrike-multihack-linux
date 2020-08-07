@@ -30,7 +30,7 @@ mem_void_t cstrike_hack_init()
     //definitions
 
     f_SDL_GL_GetProcAddress = (t_SDL_GL_GetProcAddress)dlsym(m_libSDL2.handle, s_SDL_GL_GetProcAddress);
-    if(!f_SDL_GL_GetProcAddress || f_SDL_GL_GetProcAddress == (t_SDL_GL_GetProcAddress)-1) return;
+    f_SDL_GetKeyboardState  = (t_SDL_GetKeyboardState)dlsym(m_libSDL2.handle, s_SDL_GetKeyboardState);
     p_SDL_GL_SwapWindow     = (mem_voidptr_t)dlsym(m_libSDL2.handle, s_SDL_GL_SwapWindow);
     p_SDL_GL_SwapWindow = (mem_voidptr_t)((mem_uintptr_t)p_SDL_GL_SwapWindow + 4);
 
@@ -46,11 +46,6 @@ mem_void_t cstrike_hack_init()
 
 cstrike_key_state_t cstrike_get_key_state(cstrike_key_t key)
 {
-    Display* display = XOpenDisplay(NULL);
-    char keymap[32];
-    XQueryKeymap(display, keymap);
-    KeyCode kc = XKeysymToKeycode(display, key);
-    mem_bool_t key_pressed = !!(keymap[kc >> 3] & (1 << (kc & 7)));
-    XCloseDisplay(display);
-    return key_pressed == mem_true ? cstrike_key_down : cstrike_key_up;
+    const Uint8 *state = f_SDL_GetKeyboardState(NULL);
+    return (cstrike_key_state_t)state[key];
 }

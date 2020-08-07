@@ -1,8 +1,7 @@
 #pragma once
 #ifndef CSTRIKE_MULTIHACK
 #include "libmem/libmem.h"
-#include <X11/Xlib.h>
-#include <X11/keysym.h>
+#include <SDL2/SDL.h>
 
 //defines
 
@@ -20,6 +19,7 @@
 #define s_m_libSDL2             "/libSDL2"
 #define s_SDL_GL_GetProcAddress "SDL_GL_GetProcAddress"
 #define s_SDL_GL_SwapWindow     "SDL_GL_SwapWindow"
+#define s_SDL_GetKeyboardState  "SDL_GetKeyboardState"
 
 //offsets
 
@@ -129,7 +129,8 @@ typedef struct _kbutton_s
 }kbutton_s, kbutton_t;
 
 typedef void*(* t_SDL_GL_GetProcAddress)(const char* proc);
-typedef KeySym     cstrike_key_t;
+typedef const Uint8*(* t_SDL_GetKeyboardState)(int* numkeys);
+typedef Uint8      cstrike_key_t;
 typedef mem_bool_t cstrike_key_state_t;
 
 //variables
@@ -145,6 +146,7 @@ extern kbutton_t*       in_jump;
 
 //--functions
 extern t_SDL_GL_GetProcAddress f_SDL_GL_GetProcAddress;
+extern t_SDL_GetKeyboardState  f_SDL_GetKeyboardState;
 
 //--etc
 extern mem_voidptr_t    p_SDL_GL_SwapWindow;
