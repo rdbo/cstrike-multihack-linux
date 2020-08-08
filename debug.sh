@@ -1,8 +1,6 @@
 target_process="hl_linux"
 target_pid=""
-hack_path="/tmp/libcshack"
-output_file="libcshack.so"
-libpath="$hack_path/$output_file"
+libpath="/tmp/libcshack/libcshack.so"
 
 if [ "$EUID" -ne 0 ]; then
     echo "[!] Run as root"
@@ -24,7 +22,9 @@ if [ ! -f $libpath ]; then
     exit 0
 fi
 
-gdb  \
+gdb \
   -ex "attach $target_pid" \
   -ex "set \$dlopen = (void*(*)(char*, int)) dlopen" \
   -ex "call \$dlopen(\"$libpath\", 1)"
+
+echo "[*] done"

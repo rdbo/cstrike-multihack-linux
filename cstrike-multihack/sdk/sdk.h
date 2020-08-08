@@ -1,31 +1,10 @@
 #pragma once
-#ifndef CSTRIKE_MULTIHACK
-#include "libmem/libmem.h"
-#include <SDL2/SDL.h>
+#ifndef CSTRIKE_MULTIHACK_SDK_H
+#define CSTRIKE_MULTIHACK_SDK_H
+#include "../main.h"
 
-//defines
-
-#define cstrike_key_down mem_true
-#define cstrike_key_up   mem_false
-
-//symbols/strings
-//--client.so
-#define s_m_client              "/client.so\n"
-#define s_in_jump               "in_jump"
-//--hw.so
-#define s_m_hw                  "/hw.so\n"
-#define s_g_rp                  "g_rp"
-//--libSDL2*.so*
-#define s_m_libSDL2             "/libSDL2"
-#define s_SDL_GL_GetProcAddress "SDL_GL_GetProcAddress"
-#define s_SDL_GL_SwapWindow     "SDL_GL_SwapWindow"
-#define s_SDL_GetKeyboardState  "SDL_GetKeyboardState"
-
-//offsets
-
-//game classes/types
-
-typedef struct { float data[3]; } vec3_t;
+typedef struct { float _data[3]; } vec3_t;
+typedef int qboolean;
 
 typedef struct _usercmd_s
 {
@@ -42,8 +21,6 @@ typedef struct _usercmd_s
     int impact_index;
     vec3_t impact_position;
 }usercmd_s, usercmd_t;
-
-typedef int qboolean;
 
 typedef struct _movevars_s
 {
@@ -127,39 +104,5 @@ typedef struct _kbutton_s
     int down[2];
     int state;
 }kbutton_s, kbutton_t;
-
-typedef void*(* t_SDL_GL_GetProcAddress)(const char* proc);
-typedef const Uint8*(* t_SDL_GetKeyboardState)(int* numkeys);
-typedef Uint8      cstrike_key_t;
-typedef mem_bool_t cstrike_key_state_t;
-
-//variables
-
-//--modules
-extern mem_module_t     m_libSDL2;
-extern mem_module_t     m_client;
-extern mem_module_t     m_hw;
-
-//--game
-extern demo_info_t*     g_rp;
-extern kbutton_t*       in_jump;
-
-//--functions
-extern t_SDL_GL_GetProcAddress f_SDL_GL_GetProcAddress;
-extern t_SDL_GetKeyboardState  f_SDL_GetKeyboardState;
-
-//--etc
-extern mem_voidptr_t    p_SDL_GL_SwapWindow;
-extern mem_size_t       sz_hk_SDL_GL_SwapWindow;
-extern mem_detour_int_t di_hk_SDL_GL_SwapWindow;
-extern cstrike_key_t    cstrike_key_bhop;
-
-//functions
-mem_void_t          cstrike_hack();
-mem_void_t          cstrike_hack_init();
-cstrike_key_state_t cstrike_get_key_state(cstrike_key_t key);
-
-//--features
-mem_void_t cstrike_bunnyhop();
 
 #endif
