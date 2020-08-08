@@ -11,8 +11,13 @@ mem_bytearray_t a_SDL_GL_SwapWindow;
 
 demo_info_t*    p_g_rp;
 kbutton_t*      p_in_jump;
+client_state_t* p_cl;
+Queue*          p_g_ShellQueue;
+int             old_shots_count;
+vec3_t          old_punchangle;
 
 mem_bool_t       enable_bunnyhop = mem_true;
+mem_bool_t       enable_rcs      = mem_true;
 cstrike_key_t    key_bunnyhop    = SDL_SCANCODE_SPACE;
 
 mem_size_t       sz_hk_SDL_GL_SwapWindow = 5;
