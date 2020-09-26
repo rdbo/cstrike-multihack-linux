@@ -18,6 +18,7 @@ void cstrike_multihack_startup()
 
     p_g_rp = (demo_info_t*)mem_in_get_symbol(m_hw, s_g_rp);
     p_in_jump = (kbutton_t*)mem_in_get_symbol(m_client, s_in_jump);
+    p_in_duck = (kbutton_t*)mem_in_get_symbol(m_client, s_in_duck);
     p_g_ShellQueue = (Queue*)mem_in_get_symbol(m_client, s_g_ShellQueue);
     p_cl = (client_state_t*)mem_in_get_symbol(m_hw, s_cl);
 

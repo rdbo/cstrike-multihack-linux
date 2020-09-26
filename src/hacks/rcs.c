@@ -14,6 +14,7 @@ void cstrike_rcs()
             vec3_t new_angles = (vec3_t){
                 p_cl->viewangles._data[0] + old_punchangle._data[0] - punch._data[0],
                 p_cl->viewangles._data[1] + old_punchangle._data[1] - punch._data[1],
+                p_cl->viewangles._data[2] + old_punchangle._data[2] - punch._data[2]
             };
 
             if(new_angles._data[0] < -89)     new_angles._data[0] = -89;
