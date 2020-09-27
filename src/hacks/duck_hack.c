@@ -1,7 +1,7 @@
 #include "../base.h"
 
 mem_bool_t b_jumped = mem_false;
-mem_bool_t b_duck = mem_false;
+mem_bool_t b_duck   = mem_false;
 
 void cstrike_duck_hack()
 {
@@ -42,8 +42,10 @@ void cstrike_duck_hack()
         }
     }
 
-    else if(enable_duck_hack && (cstrike_get_keystate(key_duck_hack) == cstrike_key_up) || p_g_rp->rp.health <= 0)
+    else if(b_jumped == mem_true || b_duck == mem_true || p_g_rp->rp.health <= 0)
     {
         p_in_duck->state = 4;
+        b_jumped = mem_false;
+        b_duck   = mem_false;
     }
 }
